@@ -1,3 +1,11 @@
+This project is a collaborative effort. My contributions include:
+- Cleaned the existing data and merged them across different timelines
+-  Engineered features from past inspections (average violations, recent failure rate, time since last inspection)
+- Tried different balancing techniques to tackle the imbalance
+- Trained class weighted models on dataset to predict risk restaurants.
+- Created different visualization in the website that allows the inspector to get insights about the history of the restaurant and prioritize accordingly.
+
+
 # HealthScore-Predictor
 
 A predictive data-driven framework to forecast restaurant health inspection scores and identify establishments at higher risk of violations using machine learning models.
