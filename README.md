@@ -1,210 +1,129 @@
-This project is a collaborative effort. My contributions include:
-- Cleaned the existing data and merged them across different timelines
--  Engineered features from past inspections (average violations, recent failure rate, time since last inspection)
-- Tried different balancing techniques to tackle the imbalance
-- Trained class weighted models on dataset to predict risk restaurants.
-- Created different visualization in the website that allows the inspector to get insights about the history of the restaurant and prioritize accordingly.
-
-
 # HealthScore-Predictor
 
-A predictive data-driven framework to forecast restaurant health inspection scores and identify establishments at higher risk of violations using machine learning models.
+A predictive data-driven framework designed to forecast restaurant health inspection scores and identify establishments at higher risk of violations using modern machine learning models.
+
+---
 
 ## Overview
 
-This project leverages the San Francisco Health Inspection Scores (2024-current) dataset combined with Google restaurant data to build predictive models that can forecast inspection outcomes and help identify restaurants at risk of health violations. By integrating official inspection records with public review data, the system aims to provide early warnings and insights into restaurant health compliance.
+Health inspections are typically reactive—conducted periodically or only in response to complaints. **HealthScore-Predictor** explores whether machine learning models can proactively identify restaurants likely to fail inspections by analyzing:
+- Historical violation patterns.
+- Restaurant characteristics.
+- Public perception metrics (e.g., Google Reviews).
 
-## Problem Statement
+By integrating official **San Francisco Health Inspection Scores** (2024-current) with public **Google restaurant data**, this system provides early warnings and actionable insights into restaurant health compliance.
 
-Health inspections are typically reactive, conducted periodically or in response to complaints. This project explores whether machine learning models can proactively identify restaurants likely to fail inspections by analyzing historical violation patterns, restaurant characteristics, and public perception metrics.
-
-## Research Hypotheses
-
-1. **Violation Patterns**: Restaurants with previous critical violations, lower Google ratings, or specific cuisine categories are more likely to score poorly in future inspections.
-
-2. **Model Performance**: Machine learning models (Random Forest, XGBoost, Gradient Boosting) can outperform traditional statistical baselines in predicting inspection outcomes.
-
-3. **Review Data Correlation**: Publicly available review data can serve as a proxy for hygiene perception and may correlate with actual inspection results.
+---
 
 ## Key Features
 
 ### Data Integration
-- **Multi-source Data Fusion**: Combines San Francisco health inspection data with Google Places restaurant information
-- **Advanced Matching Algorithm**: Uses fuzzy string matching, geographic proximity (Haversine distance), and address canonicalization to accurately link datasets
-- **Comprehensive Feature Engineering**: Extracts temporal patterns, violation history, and restaurant characteristics
+- **Multi-source Data Fusion:** Seamlessly links official San Francisco health inspection records with Google Places data.
+- **Advanced Matching Algorithm:** Employs fuzzy string matching (RapidFuzz), geographic proximity (Haversine distance via Geopy), and address canonicalization to bridge disparate datasets.
 
 ### Machine Learning Pipeline
-- **Multiple Model Architectures**: Implements Random Forest, XGBoost, and Gradient Boosting classifiers
-- **Robust Evaluation Framework**: Uses stratified cross-validation and comprehensive metrics (ROC-AUC, precision, recall, F1-score)
-- **Class Imbalance Handling**: Employs class weighting techniques to address imbalanced datasets
-- **Feature Importance Analysis**: Identifies key predictors of health inspection outcomes
+- **Multiple Model Architectures:** Implements Random Forest, XGBoost, and Gradient Boosting algorithms to predict inspection outcomes.
+- **Robust Evaluation:** Extensively evaluated using stratified cross-validation, ROC-AUC, precision, recall, and F1-score.
+- **Class Imbalance Handling:** Uses resampling techniques (imbalanced-learn) and class weighting to address real-world dataset skewness.
 
 ### Temporal Analysis
-- **Time-based Validation**: Implements proper temporal splits to prevent data leakage
-- **Trend Detection**: Analyzes patterns in violations over time
-- **Seasonal Effects**: Investigates potential seasonal variations in inspection outcomes
-
-## Technical Stack
-
-- **Python 3.x**: Core programming language
-- **Pandas & NumPy**: Data manipulation and numerical computing
-- **Scikit-learn**: Machine learning algorithms and evaluation metrics
-- **XGBoost**: Gradient boosting implementation
-- **Imbalanced-learn**: Resampling techniques for class imbalance
-- **Matplotlib & Seaborn**: Data visualization
-- **FuzzyWuzzy**: Fuzzy string matching for data integration
-- **Geopy**: Geographic distance calculations
-
-## Dataset
-
-### San Francisco Health Inspection Data
-- Source: San Francisco Department of Public Health
-- Time Period: 2024-current
-- Features: Inspection dates, violation types, risk categories, scores
-
-### Google Places Data
-- Restaurant names, addresses, locations
-- User ratings and review counts
-- Business categories and attributes
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/LkNeha/HealthScore-Predictor.git
-cd HealthScore-Predictor
-
-# Install required packages
-pip install -r requirement.txt
-```
-
-## Project Structure
-
-```
-HealthScore-Predictor/
-│
-├── data/                  # Raw and processed data files
-├── notebooks/             # Jupyter notebooks for analysis
-├── backend/               # Backend API and server code
-├── dashboardv1/           # Dashboard application files
-├── main.ipynb            # Main analysis notebook
-├── requirement.txt       # Project dependencies
-└── README.md            # Project documentation
-```
-
-## Usage
-
-### Data Preparation
-
-The project includes sophisticated data matching algorithms to combine health inspection records with Google restaurant data:
-
-```python
-# Example: Loading and matching datasets
-# The matching process uses:
-# 1. Fuzzy string matching for restaurant names
-# 2. Geographic proximity (Haversine distance)
-# 3. Address canonicalization
-```
-
-### Model Training
-
-Multiple machine learning models are trained and evaluated:
-
-```python
-# Models implemented:
-# - Random Forest Classifier
-# - XGBoost Classifier
-# - Gradient Boosting Classifier
-```
-
-### Evaluation
-
-Comprehensive evaluation metrics are used to assess model performance:
-- ROC-AUC scores and curves
-- Precision, Recall, F1-score
-- Confusion matrices
-- Feature importance rankings
-
-## Methodology
-
-### 1. Data Collection & Integration
-- Merge health inspection records with Google restaurant data
-- Handle missing values and data quality issues
-- Create unified restaurant identifier
-
-### 2. Feature Engineering
-- **Temporal Features**: Days since last inspection, inspection frequency
-- **Violation History**: Count and types of previous violations
-- **Restaurant Attributes**: Cuisine type, location, ratings
-- **Risk Indicators**: Critical violation flags, compliance patterns
-
-### 3. Addressing Data Challenges
-- **Temporal Leakage Prevention**: Strict time-based train/test splits
-- **Class Imbalance**: Class weight adjustment and resampling strategies
-- **Feature Selection**: Recursive feature elimination and importance analysis
-
-### 4. Model Development
-- Baseline model establishment
-- Hyperparameter tuning using grid search
-- Cross-validation for robust performance estimates
-- Ensemble methods for improved predictions
-
-### 5. Evaluation & Interpretation
-- Multi-metric performance assessment
-- Feature importance visualization
-- Error analysis and model interpretation
-- Comparative analysis across models
-
-## Results
-
-The models demonstrate the feasibility of predicting restaurant health inspection outcomes using historical data and public information. Key findings include:
-
-- Identification of most predictive features for health violations
-- Comparison of model performance across different algorithms
-- Insights into patterns that precede poor inspection results
-- Practical applicability for regulatory agencies and restaurant management
-
-## Challenges Addressed
-
-### Data Leakage
-Implemented strict temporal validation to ensure models only use information available at prediction time, preventing unrealistic performance estimates.
-
-### Class Imbalance
-The dataset exhibits significant imbalance between passing and failing restaurants. Applied class weighting to ensure models learn from minority class examples.
-
-### Data Quality
-Restaurant names and addresses often have inconsistencies. Developed robust matching algorithms using multiple signals (name similarity, geographic proximity, address normalization).
-
-## Future Enhancements
-
-- [ ] Incorporate additional data sources (weather, foot traffic, nearby construction)
-- [ ] Develop time-series forecasting for inspection scheduling
-- [ ] Create interactive dashboard for visualization
-- [ ] Implement deep learning models for pattern recognition
-- [ ] Add explainability features (SHAP values, LIME)
-- [ ] Deploy as web application for real-time predictions
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss proposed changes.
-
-## Authors
-- **Contributors** - See [contributors](https://github.com/LkNeha/HealthScore-Predictor/graphs/contributors) list
-
-## Acknowledgments
-
-- San Francisco Department of Public Health for providing inspection data
-- Google Places API for restaurant information
-- The data science community for tools and techniques
-
-## License
-
-This project is available for educational and research purposes. Please check with the repository owner for specific licensing information.
-
-## Contact
-
-For questions, suggestions, or collaboration opportunities, please open an issue on this repository.
+- **Strict Time-based Validation:** Prevents data leakage by ensuring models strictly use information available at prediction time.
+- **Trend Detection:** Evaluates violation trajectory and seasonal variations in inspection capabilities.
 
 ---
 
-**Note**: This project is developed for educational and research purposes to demonstrate machine learning applications in public health and food safety domains.
+## Technical Stack
+
+### **Data Science & ML Core**
+- **Python 3.x:** Core programming language
+- **Pandas & NumPy:** Data manipulation
+- **Scikit-learn & XGBoost:** Machine learning algorithms
+- **Imbalanced-learn:** Resampling tools
+- **Matplotlib & Seaborn:** Data visualization
+- **RapidFuzz & Geopy:** Entity matching & geospatial analysis
+
+### **Frontend Dashboard**
+- **React (v19):** Modern component-based web interface
+- **Recharts:** Interactive data visualization components
+- **React-Leaflet:** Web mapping for restaurant locations
+
+---
+
+## Project Structure
+
+```text
+HealthScore-Predictor/
+├── data/                  # Raw and processed datasets
+├── notebooks/             # Jupyter notebooks for experimentation and analysis
+├── backend/               # Python API for model inference and serving
+├── dashboardv1/           # React-based interactive web dashboard
+├── main.ipynb             # Core analysis & model training notebook
+├── requirement.txt        # Machine learning dependencies
+└── README.md              # Project documentation
+```
+
+---
+
+## Installation & Setup
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/LkNeha/HealthScore-Predictor.git
+cd HealthScore-Predictor
+```
+
+### 2. Backend & Data Pipeline Setup
+Ensure you have Python 3.x installed, then set up your environment:
+
+```bash
+# It is recommended to use a virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+
+# Install the necessary ML & backend packages
+pip install -r requirement.txt
+```
+
+### 3. Frontend Dashboard Setup
+To run the React dashboard locally:
+
+```bash
+cd dashboardv1
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+```
+The application will be accessible at `http://localhost:3000`.
+
+---
+
+## Methodology
+
+1. **Data Collection & Integration:** Gathered SF Health Data and Google Places info. Unified matching across disparate restaurant identifiers.
+2. **Feature Engineering:** Extracted temporal trends, historical violation behaviors, categorical cuisine types, and contextual risk indicators.
+3. **Addressing Challenges:** Mitigated temporal leakage via strict index splitting and countered class imbalance using class weights and over/under-sampling techniques.
+4. **Model Development:** Progressed from statistical baselines to parameter-tuned ensemble classifiers (RF, XGBoost).
+5. **Evaluation:** Extracted critical feature importance (e.g., proving previous critical violations and rating aggregates accurately forecast future failures).
+
+---
+
+## Future Enhancements
+
+- [ ] Incorporate additional data dimensions (local weather, foot traffic, neighborhood events).
+- [ ] Implement full deep-learning sequence models for better time-series pattern recognition.
+- [ ] Add explainability features like SHAP or LIME for stakeholder trust.
+- [ ] Deploy the complete API + Dashboard via Docker/Cloud platform for public access.
+
+
+- **Contributors** - See [contributors](https://github.com/LkNeha/HealthScore-Predictor/graphs/contributors) list
+
+
+## License & Acknowledgments
+
+- **Data Sources:** We thank the San Francisco Department of Public Health and Google for the public data enabling this research.
+- **License:** Distributed for educational/research purposes. Check with the repository owners for specific licensing info.
+
+> **Note:** Developed explicitly to demonstrate applied machine learning within public health and safety domains.
