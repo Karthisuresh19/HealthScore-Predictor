@@ -118,7 +118,7 @@ The application will be accessible at `http://localhost:3000`.
 - [ ] Deploy the complete API + Dashboard via Docker/Cloud platform for public access.
 
 
-- **Contributors** - See [contributors](https://github.com/LkNeha/HealthScore-Predictor/graphs/contributors) list
+## **Contributors** - See [contributors](https://github.com/LkNeha/HealthScore-Predictor/graphs/contributors) list
 
 
 ## License & Acknowledgments
