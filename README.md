@@ -126,4 +126,4 @@ The application will be accessible at `http://localhost:3000`.
 - **Data Sources:** We thank the San Francisco Department of Public Health and Google for the public data enabling this research.
 - **License:** Distributed for educational/research purposes. Check with the repository owners for specific licensing info.
 
-> **Note:** Developed explicitly to demonstrate applied machine learning within public health and safety domains.
+> **Note:** This project is developed for educational and research purposes to demonstrate applied machine learning within public health and safety domains.
